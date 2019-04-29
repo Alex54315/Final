@@ -8,6 +8,8 @@ class App extends PIXI.Application
   rows: 12
   width: window.innerWidth
   height: window.innerHeight
+  PosX: 0
+  PosY: 0
   constructor: (w, h, o) ->
     super(w, h, o)
     document.body.appendChild @view
@@ -17,19 +19,15 @@ class App extends PIXI.Application
   build: =>
     MyWidth = @width / @columns
     MyHeight = @height / @rows
-    @PosX = 0
-    for r in [0..@rows]
-      r = new Rectangle(@PosX, @PosY, MyWidth, MyHeight, 0xFFA200)
+    for r in [1..@rows]
+      for c in [1..@columns]
+        a = new Rectangle(@PosX, @PosY, MyWidth, MyHeight, 0xFFA200)
+        @PosY = MyHeight + @PosY
+        @addAnimationNodes a
+        @stage.addChild (a)
+        # console.log r,c, @PosX
       @PosX = MyWidth + @PosX
       @PosY = 0
-      @addAnimationNodes r
-      @stage.addChild (r)
-      for c in [0..@columns]
-        c = new Rectangle(@PosX, @PosY, MyWidth, MyHeight, 0xFFA200)
-        @PosY = MyHeight + @PosY
-        @addAnimationNodes c
-        @stage.addChild (c)
-
 
   addAnimationNodes: (child) =>
     @animationNodes.push child

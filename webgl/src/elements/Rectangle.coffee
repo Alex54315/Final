@@ -40,16 +40,14 @@ class Rectangle extends PIXI.Graphics
     animate: ->
         return if @doit
             if @flip is true
-                @.scale.x -= 0.5
-                # @.position.x += @Width/2
+                @.scale.x -= 0.1
             if @.scale.x <= 0.1
                 @flip = false
             if @flip is false
                 @.scale.x += 0.1
-                # @.position.x -= @Width/2
             if @.scale.x >= 1
                 @.scale.x = 1
-                @.x = @positionX
-                @.y = @positionY
+                # @positionX = @.x
+                # @positionY = @.y
 
 module.exports = Rectangle
